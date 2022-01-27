@@ -29,7 +29,8 @@
           "regex": "^I[A-Z]",
           "match": true
         }
-      }
+      },
+"prettier"
     ],
     "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
