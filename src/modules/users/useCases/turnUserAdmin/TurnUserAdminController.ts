@@ -8,7 +8,7 @@ class TurnUserAdminController {
   handle(request: Request, response: Response): Response {
     try {
       const user = this.turnUserAdminUseCase.execute({
-        user_id: String(request.headers.user_id),
+        user_id: request.params.user_id,
       });
       return response.status(201).json(user);
     } catch (error) {
