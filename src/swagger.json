@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Desafio 1 - Chapter 2 - NodeJS",
+    "description": "Gerenciamento de Usuários",
+    "version": "1.0.0",
+    "contact": { "email": "gustavogmfarias@gmail.com" }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new User",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "e-mail": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "category name sample",
+                  "e-mail": "name@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "paths": {
+        "/users/{userId}": {
+          "get": {
+            "tags": ["Users"],
+            "summary": "List all users",
+            "description": "Only admins can list users",
+            "parameters": {
+              "- in": "path",
+              "name": "userId",
+              "schema": {
+                "type": "integer"
+              },
+              "required": true,
+              "minimum": 1,
+              "description": "Parameter description in Markdown."
+            },
+            "responses": {
+              "200": {
+                "description": "Sucess",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "e-mail": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
