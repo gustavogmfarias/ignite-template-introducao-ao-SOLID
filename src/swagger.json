@@ -42,40 +42,221 @@
           }
         }
       },
-      "paths": {
-        "/users/{userId}": {
-          "get": {
-            "tags": ["Users"],
-            "summary": "List all users",
-            "description": "Only admins can list users",
-            "parameters": {
-              "- in": "path",
-              "name": "userId",
-              "schema": {
-                "type": "integer"
-              },
-              "required": true,
-              "minimum": 1,
-              "description": "Parameter description in Markdown."
+      "get": {
+        "tags": ["Users"],
+        "summary": "List all users",
+        "description": "Only admins can list users",
+        "parameters": [
+          {
+            "- in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string"
             },
-            "responses": {
-              "200": {
-                "description": "Sucess",
-                "content": {
-                  "application/json": {
-                    "schema": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string"
-                          },
-                          "e-mail": {
-                            "type": "string"
-                          }
-                        }
+            "required": true,
+            "minimum": 1,
+            "description": "Parameter description in Markdown."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação Realizada com Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": { "type": "string" },
+                      "email": { "type": "string" },
+                      "created_at": { "type": "date" },
+                      "updated_at": { "type": "date" }
+                    },
+                    "example": [
+                      {
+                        "admin": true,
+                        "id": "123456",
+                        "name": "Gustavo Goulart",
+                        "email": "gustavogmfarias@gmail.com",
+                        "created_at": "15/07/21",
+                        "updated_at": "16/07/21"
+                      },
+                      {
+                        "admin": true,
+                        "id": "123456",
+                        "name": "Gustavo Goulart",
+                        "email": "gustavogmfarias@gmail.com",
+                        "created_at": "15/07/21",
+                        "updated_at": "16/07/21"
                       }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário sem permissão ou usuário não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "intenger"
+                      }
+                    },
+                    "example": {
+                      "error": "You need to be an administrator to list all users"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Return an specific user",
+        "description": "Return an specific user",
+        "parameters": [
+          {
+            "- in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "minimum": 1,
+            "description": "Parameter description in Markdown."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação Realizada com Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "admin": {
+                        "type": "boolean"
+                      }
+                    },
+                    "example": [
+                      {
+                        "admin": true,
+                        "id": "123456",
+                        "name": "Gustavo Goulart",
+                        "email": "gustavogmfarias@gmail.com",
+                        "created_at": "15/07/21",
+                        "updated_at": "16/07/21"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário  não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "intenger"
+                      }
+                    },
+                    "example": {
+                      "error": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/admin": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Turn an user into an admin",
+        "description": "Turn an user into an admin",
+        "parameters": [
+          {
+            "- in": "path",
+            "name": "userId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "minimum": 1,
+            "description": "Parameter description in Markdown."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação Realizada com Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "admin": {
+                        "type": "boolean"
+                      }
+                    },
+                    "example": [
+                      {
+                        "admin": true,
+                        "id": "123456",
+                        "name": "Gustavo Goulart",
+                        "email": "gustavogmfarias@gmail.com",
+                        "created_at": "15/07/21",
+                        "updated_at": "16/07/21"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário  não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "intenger"
+                      }
+                    },
+                    "example": {
+                      "error": "User not found"
                     }
                   }
                 }
